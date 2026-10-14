@@ -105,7 +105,7 @@ export default function SubmitProduct() {
 			formDataPayload.append("image", imageFile);
 
 			// Step 3: Send the package at your backend pipeline
-			const res = await fetch("http://localhost:5001/api/listings", {
+			const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listings`, {
 				method: "POST",
 				headers: {
 					// Present the token to the backend for verification and authentication
