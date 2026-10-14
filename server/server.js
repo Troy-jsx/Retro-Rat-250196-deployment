@@ -37,3 +37,11 @@ app.use("/api/saved", savedRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// bruh please tell me whats wrong
+app.use((err, req, res, next) => {
+	console.error(err);
+	res.status(err.http_code || err.status || 500).json({
+		error: err.message || "Something went wrong",
+	});
+});
