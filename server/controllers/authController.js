@@ -2,7 +2,7 @@ const User = require('../models/User'); // Import the schema
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// POST /api/auth/signup
+// POST /auth/signup
 exports.signup = async (req, res) => {
   try {
     // Frontend sends the string representation of the notes
@@ -31,7 +31,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-// POST /api/auth/login
+// POST /auth/login
 exports.login = async (req, res) => {
   try {
     const { email, musicalSequence } = req.body;

@@ -15,7 +15,7 @@ function ACReviewBlockPending() {
 				// const res = await fetch("http://localhost:5001/api/listings", {
 				// 	headers: { Authorization: `Bearer ${token}` },
 				// });
-				const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listings/pending`, {
+				const res = await fetch(`${import.meta.env.VITE_API_URL}/listings/pending`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				if (!res.ok) throw new Error("Failed to fetch pending listings");
@@ -33,7 +33,7 @@ function ACReviewBlockPending() {
 	// 2... Handle the approval of listings
 	const handleApprove = async (id) => {
 		const token = localStorage.getItem("token");
-		await fetch(`${import.meta.env.VITE_API_URL}/api/listings/${id}`, {
+		await fetch(`${import.meta.env.VITE_API_URL}/listings/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ function ACReviewBlockPending() {
 	// 3... Handle the denial of listings
 	const handleDeny = async (id) => {
 		const token = localStorage.getItem("token");
-		await fetch(`${import.meta.env.VITE_API_URL}/api/listings/${id}`, {
+		await fetch(`${import.meta.env.VITE_API_URL}/listings/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: `Bearer ${token}`,
