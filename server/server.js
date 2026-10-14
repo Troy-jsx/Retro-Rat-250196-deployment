@@ -12,28 +12,28 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-	.connect(process.env.MONGO_URI)
-	.then(() => console.log("MongoDB connected"))
-	.catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 // User routes
 const userRoutes = require("./routes/userRoutes");
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
-//Listing routes
+// Listing routes
 const listingRoutes = require("./routes/listingRoutes");
-app.use("/listings", listingRoutes);
+app.use("/api/listings", listingRoutes);
 
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
-});
-
-//cart routes
+// Cart routes
 const cartRoutes = require("./routes/cartRoutes");
-app.use("/cart", cartRoutes);
+app.use("/api/cart", cartRoutes);
 
 const commentRoutes = require("./routes/commentRoutes");
-app.use("/comments", commentRoutes);
+app.use("/api/comments", commentRoutes);
 
 const savedRoutes = require("./routes/savedRoutes");
-app.use("/saved", savedRoutes);
+app.use("/api/saved", savedRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
