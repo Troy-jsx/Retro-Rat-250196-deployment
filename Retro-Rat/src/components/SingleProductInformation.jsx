@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./SingleProductInformation.css";
 import { useNavigate } from "react-router-dom";
 import { apiGet, apiPost, apiDelete } from "../client";
-import FlagButtonComponent from "./flagButtonComponent";
+import FlagButtonComponent from "./FlagButtonComponent";
 import SellerContainerComponent from "./SellerContainerComponent";
 import DeleteItemBtn from "./AdminDeleteItemBtnComponent";
 

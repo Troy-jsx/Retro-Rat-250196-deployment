@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import TunePassword from "../components/TunePassword";
 
-import LocationIcon from "../assets/LocationIcon.svg";
+import LocationIcon from "../assets/locationIcon.svg";
 import { useToast } from "./ToastContext";
 import "../pages/LoginPage.css";
 

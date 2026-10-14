@@ -1,5 +1,5 @@
 import "./BootSequence.css";
-import ratImg from "../assets/bootRAT2.png";
+import ratImg from "../assets/bootRat2.png";
 import BootHeader from "../components/BootHeader";
 
 export default function BootSequence() {
