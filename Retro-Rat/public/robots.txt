@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /api
+Disallow: /admin
+Disallow: /account
+Disallow: /cart
+Disallow: /sell
+Disallow: /edit
+Disallow: /login
+Sitemap: http://15.240.102.61/sitemap.xml
