@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import usePageMeta from "../usePageMeta";
 
 import SingleProductImage from "../components/SingleProductImage";
 import SingleProductInformation from "../components/SingleProductInformation";
@@ -39,7 +40,15 @@ function SingleProductView() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [id]);
-
+  usePageMeta(
+    listing ? `${listing.productName} | Retro Rat` : undefined,
+    listing
+      ? `${listing.productName}, ${listing.condition} condition, R${listing.price} in ${listing.location}. ${listing.description}`.slice(
+          0,
+          155,
+        )
+      : undefined,
+  );
   if (loading) return <p>Loading product...</p>;
   if (error) return <p>Couldn't load product: {error}</p>;
   if (!listing) return <p>Product not found.</p>;
