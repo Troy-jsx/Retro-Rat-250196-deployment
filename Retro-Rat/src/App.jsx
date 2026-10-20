@@ -1,79 +1,71 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
+// Import CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-dotenv.config();
+// Import Components
 
-const app = express();
-const PORT = process.env.PORT || 5001;
-app.use(cors());
+import BootSequence from "./pages/BootSequence";
+import ProductCard from "./components/ProductCard";
+import TunePassword from "./components/TunePassword";
+import HeaderFlag from "./components/HeaderFlag";
+import SingleProductImage from "./components/SingleProductImage";
+import SingleProductView from "./pages/SingleProductView";
+import Navbar from "./components/Navbar";
 
-app.use(express.json());
+// Import Pages
+import ProductsPage from "./pages/Products";
+import SubmitProduct from "./pages/SubmitProduct";
+import UserConsolePage from "./pages/UserConsolePage";
+import AdminConsolePage from "./pages/AdminConsolePage";
+import LoginPage from "./pages/LoginPage";
+import CartPage from "./pages/CartPage";
+import Homepage from "./pages/Homepage";
+import EditProduct from "./pages/EditProduct";
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 
-// User routes
-const userRoutes = require("./routes/userRoutes");
-app.use("/api/users", userRoutes);
+// Import Browser Router stuff...
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Footer from "./components/Footer";
 
-// Listing routes
-const listingRoutes = require("./routes/listingRoutes");
-app.use("/api/listings", listingRoutes);
+// I added this becuase everytime i navigated to a page from home it too my to the bottom of the page for some reason T-T
+import ScrollToTop from "./components/ScrollToTop";
+import { ToastProvider } from "./components/ToastContext";
 
-// Cart routes
-const cartRoutes = require("./routes/cartRoutes");
-app.use("/api/cart", cartRoutes);
+function App() {
+	return (
+		<>
+			<BrowserRouter>
+			<ToastProvider>
+			<ScrollToTop/>
+				<Navbar></Navbar>
+				<Routes>
+					<Route path="/" element={<Homepage />} />
+					<Route path="/browse" element={<ProductsPage />} />
+					<Route path="/sell" element={<SubmitProduct />} />
+					<Route path="/sell/:id" element={<EditProduct />} />
+					<Route path="/cart" element={<CartPage />} />
+					<Route path="/edit/:id" element={<EditProduct />} />
 
-const commentRoutes = require("./routes/commentRoutes");
-app.use("/api/comments", commentRoutes);
+					{/* Single Product overview page route */}
+					<Route path="/product/:id" element={<SingleProductView />}></Route>
 
-const savedRoutes = require("./routes/savedRoutes");
-app.use("/api/saved", savedRoutes);
+					{/* route for switching tabs on admin console page */}
+					<Route path="/admin/*" element={<AdminConsolePage />} />
+					<Route path="/account" element={<UserConsolePage />} />
 
-// Sitemap for Google Search Console
-const Listing = require("./models/Listing");
+					{/* routes for panel switching on login and sign up page */}
+					<Route path="/login" element={<LoginPage />}>
+						<Route index element={<LoginForm />} />
+						<Route path="signup" element={<SignUpForm />} />
+					</Route>
+				</Routes>
+				<Footer></Footer>
+				</ToastProvider>
+			</BrowserRouter>
+		</>
+	);
+}
 
-app.get("/sitemap.xml", async (req, res) => {
-  const base = `${req.protocol}://${req.get("host")}`;
-  const listings = await Listing.find({ status: "approved" }).select(
-    "_id updatedAt",
-  );
-
-  const urls = [
-    `<url><loc>${base}/</loc></url>`,
-    `<url><loc>${base}/browse</loc></url>`,
-    ...listings.map(
-      (l) =>
-        `<url><loc>${base}/product/${l._id}</loc>` +
-        (l.updatedAt
-          ? `<lastmod>${l.updatedAt.toISOString().slice(0, 10)}</lastmod>`
-          : "") +
-        `</url>`,
-    ),
-  ];
-
-  res
-    .type("application/xml")
-    .send(
-      '<?xml version="1.0" encoding="UTF-8"?>' +
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
-        urls.join("") +
-        "</urlset>",
-    );
-});
-
-// Error handler: log the real error and send JSON instead of an HTML page
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(err.http_code || err.status || 500).json({
-    error: err.message || "Something went wrong",
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default App;
