@@ -11,6 +11,7 @@ import HeaderFlag from "./components/HeaderFlag";
 import SingleProductImage from "./components/SingleProductImage";
 import SingleProductView from "./pages/SingleProductView";
 import Navbar from "./components/Navbar";
+import StudentNotice from "./components/StudentNotice";
 
 // Import Pages
 import ProductsPage from "./pages/Products";
@@ -40,6 +41,7 @@ function App() {
 			<ToastProvider>
 			<ScrollToTop/>
 				<Navbar></Navbar>
+				<StudentNotice />
 				<Routes>
 					<Route path="/" element={<Homepage />} />
 					<Route path="/browse" element={<ProductsPage />} />
