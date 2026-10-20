@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import usePageMeta from "../usePageMeta";
 
 import "./Homepage.css";
 import { apiGet } from "../client";

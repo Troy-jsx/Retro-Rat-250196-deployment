@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import ProductCard from "../components/ProductCard";
 import "./Products.css";
-
+import usePageMeta from "../usePageMeta";
 import { Container, Row } from "react-bootstrap";
 import FilterBar from "../components/FilterBar";
 import Footer from "../components/Footer";
